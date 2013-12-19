@@ -16,6 +16,18 @@
 
 }
 
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self == nil) {
+        return nil;
+    }
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(didTextChangeText:) name:UITextViewTextDidChangeNotification object:nil];
+    [self updateSyntax];
+    [KOKeyboardRow applyToTextView:self];
+    return self;
+}
+
 - (id)initWithCoder:(NSCoder *) coder {
     self = [super initWithCoder:coder];
     if (self == nil) {
